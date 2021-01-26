@@ -10,6 +10,7 @@ const {
   ADD_ITEM,
   REMOVE_ITEM,
   CLEAR_ITEM_ITEM_FROM_CART,
+  CLEAR_CART,
 } = CartActionTypes;
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -27,7 +28,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
     case REMOVE_ITEM:
       return {
         ...state,
-        cartItems: removeItemFromCart(state.cartItems, action.payload)
+        cartItems: removeItemFromCart(state.cartItems, action.payload),
       };
     case CLEAR_ITEM_ITEM_FROM_CART:
       return {
@@ -35,6 +36,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         cartItems: state.cartItems.filter(
           (cartItem) => cartItem.id != action.payload.id
         ),
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cartItems: [],
       };
     default:
       return state;
